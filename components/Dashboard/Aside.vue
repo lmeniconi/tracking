@@ -9,30 +9,18 @@
         </template>
         Inicio
       </vs-sidebar-item>
-      <vs-sidebar-item id="users">
-        <template #icon> <UserIcon /> </template>
-        Usuarios
-      </vs-sidebar-item>
-      <vs-sidebar-item id="projects">
-        <template #icon>
-          <GeometryIcon />
-        </template>
-        Proyectos
-      </vs-sidebar-item>
-      <vs-sidebar-item id="posts">
-        <template #icon>
-          <BrandDisqusIcon />
-        </template>
-        Posts
+      <vs-sidebar-item id="applications">
+        <template #icon> <AppsIcon /> </template>
+        Aplicaciones
       </vs-sidebar-item>
 
       <template #footer>
-        <vs-row>
+        <div class="flex w-full justify-center">
           <vs-avatar>
-            <img v-if="user && user.picture" :src="user.picture" />
+            <img v-if="user?.picture" :src="user.picture" />
             <UserIcon v-else />
           </vs-avatar>
-        </vs-row>
+        </div>
       </template>
     </vs-sidebar>
   </aside>
@@ -55,7 +43,7 @@ export default {
   watch: {
     active() {
       const path = this.active === 'home' ? '/' : `/${this.active}`
-      this.$router.push('/admin' + path)
+      this.$router.push('/dashboard' + path)
     },
     $route() {
       let active = this.$route.name.split('-')[1]

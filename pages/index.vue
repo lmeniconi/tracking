@@ -10,7 +10,13 @@
           <br /><br />
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, alias!
         </p>
-        <vs-button gradient> Empezar </vs-button>
+        <div>
+          <NuxtLink to="/dashboard">
+            <vs-button gradient>
+              {{ user ? 'Ir a Dashboard' : 'Empezar' }}
+            </vs-button>
+          </NuxtLink>
+        </div>
       </div>
       <div></div>
     </div>
@@ -21,5 +27,10 @@
 import Vue from 'vue'
 export default Vue.extend({
   layout: 'home',
+  computed: {
+    user() {
+      return this.$store.state.auth.user
+    },
+  },
 })
 </script>
