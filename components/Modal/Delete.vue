@@ -1,5 +1,5 @@
 <template>
-  <vs-dialog v-model="active">
+  <vs-dialog v-model="active" :loading="loading">
     <template #header>
       <h4>{{ title }}</h4>
     </template>
@@ -43,6 +43,7 @@ export default Vue.extend({
   data() {
     return {
       active: this.value,
+      loading: false,
     }
   },
   watch: {
@@ -59,7 +60,9 @@ export default Vue.extend({
   },
   methods: {
     async submit() {
+      this.loading = true
       await this.$axios.delete(this.endpoint)
+      this.loading = false
 
       this.toggleActive()
       this.$emit('refresh')

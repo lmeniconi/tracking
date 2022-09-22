@@ -15,6 +15,7 @@ export default {
   },
 
   ssr: false,
+  loading: false,
 
   publicRuntimeConfig: {
     appUrl: process.env.APP_URL,
@@ -30,6 +31,7 @@ export default {
       src: '@/plugins/vuesax',
       mode: 'client',
     },
+    { src: '@/plugins/vue-charts.js', mode: 'client' },
     '@/plugins/tabler-icons',
   ],
 

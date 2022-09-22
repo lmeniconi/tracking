@@ -5,6 +5,7 @@
         <vs-card
           v-for="application in applications"
           :key="application.id"
+          class="mx-auto"
           type="2"
         >
           <template #title>
@@ -21,7 +22,7 @@
 
           <template #text>
             <div class="flex w-full flex-nowrap items-center justify-between">
-              <div>{{ application.url }}</div>
+              <div class="text-xs">{{ application.url }}</div>
               <vs-button danger icon @click="toggleDeleteModal(application.id)">
                 <TrashIcon size="14" />
               </vs-button>

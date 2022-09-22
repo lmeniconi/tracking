@@ -1,12 +1,14 @@
 <template>
   <div>
-    <vs-card type="2" @click="toggleActive">
-      <template #img>
-        <div class="flex h-60 w-full items-center justify-center">
-          <PlusIcon />
-        </div>
-      </template>
-    </vs-card>
+    <div
+      class="group mx-auto flex h-60 w-full max-w-[350px] transform cursor-pointer items-center justify-center rounded-2xl border border-white transition duration-300 hover:scale-95 hover:border-black"
+      @click="toggleActive"
+    >
+      <PlusIcon class="transition duration-300 group-hover:hidden" />
+      <p class="hidden transition duration-300 group-hover:block">
+        Nueva Aplicación
+      </p>
+    </div>
 
     <vs-dialog v-model="active" :loading="loading">
       <template #header>
