@@ -10,11 +10,8 @@ export const mutations = {
 
 export const actions = {
   async fetchUser({ commit }, redirect = false) {
-    console.log('fetchUser', this.$config)
     try {
-      const user = await this.$axios.$get(this.$config.apiUrl + '/me', {
-        withCredentials: true,
-      })
+      const user = await this.$axios.$get('/me')
       commit('setUser', user)
     } catch {
       if (redirect) {

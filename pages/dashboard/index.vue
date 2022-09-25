@@ -1,21 +1,24 @@
 <template>
-  <div class="grid h-full grid-cols-4 gap-4">
-    <div class="col-span-1">
+  <div class="grid h-full grid-cols-12 gap-10 lg:gap-4">
+    <div class="col-span-12 space-y-5 xl:col-span-3">
       <h2 class="text-center text-3xl font-semibold">Mis Aplicaciones</h2>
-      <div class="h-full w-full space-y-1 py-5">
-        <NuxtLink
-          v-for="application in applications"
+      <div class="mx-auto w-full space-y-2">
+        <DashboardApplicationCard
+          v-for="application in applications.slice(0, 3)"
           :key="application.id"
-          to="/dashboard"
-          class="block w-full rounded-xl py-2 text-center text-xl text-white transition duration-300 hover:scale-105"
-          :style="{ backgroundColor: application.color }"
-        >
-          {{ application.name }}
+          class="max-h-52"
+          :application="application"
+        />
+      </div>
+      <div class="flex justify-center">
+        <NuxtLink to="/dashboard/applications">
+          <vs-button size="large"> Ver todas </vs-button>
         </NuxtLink>
       </div>
     </div>
-
-    <div class="col-span-3 flex h-full w-full items-center justify-center">
+    <div
+      class="col-span-12 flex h-full w-full items-center justify-center xl:col-span-9"
+    >
       <LineChart
         :chartData="chartData"
         :chartOptions="{

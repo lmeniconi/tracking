@@ -25,7 +25,6 @@
     </vs-sidebar>
   </aside>
 </template>
-
 <script>
 export default {
   data() {

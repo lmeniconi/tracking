@@ -1,44 +1,25 @@
 <template>
   <div>
-    <section>
-      <div class="grid grid-cols-4 gap-4">
-        <vs-card
+    <section class="space-y-10">
+      <vs-button @click="createModal = true">
+        <LayoutGridAddIcon class="pr-1" /> Nueva Aplicación
+      </vs-button>
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <DashboardApplicationCard
           v-for="application in applications"
           :key="application.id"
-          class="mx-auto"
-          type="2"
-        >
-          <template #title>
-            <h3>
-              {{ application.name }}
-            </h3>
-          </template>
-
-          <template #img>
-            <div class="h-64 w-full">
-              <img :src="application.previewUrl" />
-            </div>
-          </template>
-
-          <template #text>
-            <div class="flex w-full flex-nowrap items-center justify-between">
-              <div class="text-xs">{{ application.url }}</div>
-              <vs-button danger icon @click="toggleDeleteModal(application.id)">
-                <TrashIcon size="14" />
-              </vs-button>
-            </div>
-          </template>
-
-          <template #interactions>
-            <vs-button v-if="application.active" success icon />
-            <vs-button v-else danger icon />
-          </template>
-        </vs-card>
-
-        <DashboardApplicationAddCard @refresh="fetchApplications" />
+          :application="application"
+          :preview="false"
+          @preview="togglePreviewModal"
+          @delete="toggleDeleteModal"
+        />
       </div>
     </section>
 
+    <DashboardApplicationModalCreate
+      v-model="createModal"
+      @refresh="fetchApplications"
+    />
     <ModalDelete
       v-model="deleteModal"
       :endpoint="`/applications/${selectedId}`"
@@ -53,7 +34,9 @@ export default Vue.extend({
   data() {
     return {
       selectedId: 0,
+      previewModal: false,
       deleteModal: false,
+      createModal: false,
 
       applications: [],
     }
@@ -67,6 +50,10 @@ export default Vue.extend({
       this.applications = data
     },
 
+    togglePreviewModal(id: number) {
+      this.selectedId = id
+      this.previewModal = !this.previewModal
+    },
     toggleDeleteModal(id: number) {
       this.selectedId = id
       this.deleteModal = !this.deleteModal
@@ -74,9 +61,3 @@ export default Vue.extend({
   },
 })
 </script>
-
-<style lang="postcss">
-.vs-card__text {
-  width: 100%;
-}
-</style>

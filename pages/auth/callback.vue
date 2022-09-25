@@ -13,7 +13,9 @@ export default Vue.extend({
       type: 'points',
     })
 
-    this.$router.push(localStorage.getItem('redirectUri') || '/dashboard')
+    this.$nextTick(() => {
+      this.$router.push(localStorage.getItem('redirectUri') || '/dashboard')
+    })
   },
 })
 </script>
