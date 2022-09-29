@@ -33,6 +33,7 @@ export default {
     },
     { src: '@/plugins/vue-charts.js', mode: 'client' },
     '@/plugins/tabler-icons',
+    '@/plugins/nuxt-axios-is-trash',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
