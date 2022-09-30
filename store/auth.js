@@ -10,6 +10,8 @@ export const mutations = {
 
 export const actions = {
   async fetchUser({ commit }, redirect = false) {
+    console.log(process.env.API_URL)
+
     try {
       const user = await this.$axios.$get('/me')
       commit('setUser', user)
