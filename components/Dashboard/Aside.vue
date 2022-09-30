@@ -15,14 +15,26 @@
       </vs-sidebar-item>
 
       <template #footer>
-        <div class="flex w-full justify-center">
-          <vs-avatar>
-            <img v-if="user?.picture" :src="user.picture" />
-            <UserIcon v-else />
-          </vs-avatar>
+        <div class="flex w-full justify-center space-y-2">
+          <button @click="toggleMenu">
+            <vs-avatar>
+              <img v-if="user?.picture" :src="user.picture" />
+              <UserIcon v-else />
+            </vs-avatar>
+          </button>
         </div>
       </template>
     </vs-sidebar>
+
+    <transition name="fade">
+      <section
+        v-if="menu"
+        class="absolute top-0 left-0 z-[9002] h-screen w-full bg-black bg-opacity-50 p-20"
+        @click.self="toggleMenu"
+      >
+        <div class="h-full w-fit bg-white"><button>xd</button></div>
+      </section>
+    </transition>
   </aside>
 </template>
 <script>
@@ -32,6 +44,7 @@ export default {
     if (!active) active = 'home'
     return {
       active,
+      menu: false,
     }
   },
   computed: {
@@ -50,5 +63,22 @@ export default {
       this.active = active
     },
   },
+  methods: {
+    toggleMenu() {
+      this.menu = !this.menu
+    },
+  },
 }
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <section>
     <DashboardAside />
-    <main class="h-screen overflow-y-auto p-14 lg:p-24">
+    <main class="h-screen overflow-y-auto py-14 pl-14 pr-5 xl:p-24">
       <Nuxt />
     </main>
   </section>

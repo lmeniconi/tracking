@@ -1,12 +1,14 @@
 <template>
-  <div class="grid h-full grid-cols-12 gap-10 lg:gap-4">
+  <div class="grid h-full grid-cols-12 gap-y-10 xl:gap-10">
     <div class="col-span-12 space-y-5 xl:col-span-3">
-      <h2 class="text-center text-3xl font-semibold">Mis Aplicaciones</h2>
-      <div class="mx-auto w-full space-y-2">
+      <h2 class="text-center text-2xl font-semibold lg:text-3xl">
+        Mis Aplicaciones
+      </h2>
+      <div class="space-y-2">
         <DashboardApplicationCard
           v-for="application in applications.slice(0, 3)"
           :key="application.id"
-          class="max-h-52"
+          class="mx-auto max-h-52 w-fit"
           :application="application"
         />
       </div>
@@ -17,12 +19,14 @@
       </div>
     </div>
     <div
-      class="col-span-12 flex h-full w-full items-center justify-center xl:col-span-9"
+      class="col-span-12 flex h-full w-full items-center justify-center md:p-10 xl:col-span-9 xl:p-20"
     >
       <LineChart
+        class="h-full w-full"
         :chartData="chartData"
         :chartOptions="{
           responsive: true,
+          maintainAspectRatio: false,
         }"
       />
     </div>
@@ -31,6 +35,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+// import dayjs from 'dayjs'
 import { startLoader } from '@/utils/loader'
 
 export default Vue.extend({
@@ -39,21 +44,14 @@ export default Vue.extend({
       applications: [],
 
       chartData: {
-        labels: [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-        ],
+        labels: [''],
         datasets: [],
       },
     }
   },
   async mounted() {
     const loader = startLoader(this)
+    this.chartData.labels = this.generateChartLabels(24)
     await this.fetchApplications()
     loader.close()
   },
@@ -62,7 +60,7 @@ export default Vue.extend({
       const { data } = await this.$axios.get('/applications')
       const applications = data.map((a: any) => ({
         ...a,
-        color: this.generateColor(),
+        color: this.getRandomColor(),
       }))
 
       this.chartData.datasets = applications.map((application: any) => {
@@ -70,13 +68,30 @@ export default Vue.extend({
           label: application.name,
           backgroundColor: application.color,
           data: application.reports.map((report: any) => report.status),
+          fill: false,
         }
       })
 
       this.applications = applications
     },
-    generateColor() {
-      return '#' + Math.floor(Math.random() * 16777215).toString(16)
+
+    generateChartLabels(hours: number): string[] {
+      const labels = []
+      for (let i = 0; i < hours; i++) {
+        const hour = i.toString().padStart(2, '0')
+        labels.push(`${hour}:00`)
+      }
+      return labels
+    },
+
+    getRandomColor() {
+      const letters = '0123456789ABCDEF'
+      let color = '#'
+
+      for (let i = 0; i < 6; i++)
+        color += letters[Math.floor(Math.random() * 16)]
+
+      return color
     },
   },
 })
