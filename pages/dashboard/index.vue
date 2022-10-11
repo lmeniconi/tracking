@@ -1,9 +1,6 @@
 <template>
   <div class="grid h-full grid-cols-12 gap-y-10 xl:gap-10">
     <div class="col-span-12 space-y-5 xl:col-span-3">
-      <h2 class="text-center text-2xl font-semibold lg:text-3xl">
-        Mis Aplicaciones
-      </h2>
       <div class="space-y-2">
         <DashboardApplicationCard
           v-for="application in applications.slice(0, 3)"

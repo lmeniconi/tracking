@@ -1,6 +1,7 @@
 <template>
   <div>
-    <section class="space-y-10">
+    <section class="section-space-y">
+      <h2 class="title">Mis Aplicaciones</h2>
       <vs-button @click="createModal = true">
         <LayoutGridAddIcon class="pr-1" /> Nueva Aplicación
       </vs-button>

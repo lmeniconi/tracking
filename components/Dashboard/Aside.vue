@@ -13,6 +13,10 @@
         <template #icon> <AppsIcon /> </template>
         Aplicaciones
       </vs-sidebar-item>
+      <vs-sidebar-item id="settings">
+        <template #icon> <SettingsIcon /> </template>
+        Configuración
+      </vs-sidebar-item>
 
       <template #footer>
         <div class="flex w-full justify-center space-y-2">

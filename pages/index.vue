@@ -1,24 +1,17 @@
 <template>
   <section class="flex h-screen items-center justify-center bg-emerald-800">
-    <div class="mx-auto grid w-10/12 grid-cols-2 gap-4">
+    <div class="flex justify-center text-center">
       <div class="space-y-8 text-white">
-        <h1 class="text-6xl font-bold">Track your APP</h1>
-        <p class="w-9/12">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta,
-          voluptatibus. Veniam labore dicta asperiores nemo molestiae dolorum
-          amet rerum. Placeat.
-          <br /><br />
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, alias!
-        </p>
-        <div>
+        <h1 class="text-6xl font-bold">Riporter</h1>
+        <p class="text-xl">Reportes de estado para aplicaciones web</p>
+        <div class="flex justify-center">
           <NuxtLink to="/dashboard">
-            <vs-button gradient>
+            <vs-button size="xl" gradient>
               {{ user ? 'Ir a Dashboard' : 'Empezar' }}
             </vs-button>
           </NuxtLink>
         </div>
       </div>
-      <div></div>
     </div>
   </section>
 </template>
