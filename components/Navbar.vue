@@ -1,6 +1,8 @@
 <template>
   <nav class="fixed top-0 flex w-full items-center justify-between px-20">
-    <div><BoxIcon color="white" size="30" /></div>
+    <div>
+      <BoxIcon color="white" size="30" />
+    </div>
 
     <div v-if="!user" class="flex space-x-2">
       <NuxtLink to="/auth/auth0">

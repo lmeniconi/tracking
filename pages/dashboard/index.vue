@@ -1,18 +1,32 @@
 <template>
-  <div class="grid h-full grid-cols-12 gap-y-10 xl:gap-10">
-    <div class="col-span-12 space-y-5 xl:col-span-3">
-      <div class="space-y-2">
-        <DashboardApplicationCard
-          v-for="application in applications.slice(0, 3)"
-          :key="application.id"
-          class="mx-auto max-h-52 w-fit"
-          :application="application"
-        />
-      </div>
-      <div class="flex justify-center">
-        <NuxtLink to="/dashboard/applications">
-          <vs-button size="large"> Ver todas </vs-button>
-        </NuxtLink>
+  <div v-if="!applications.length" class="space-y-5">
+    <h1 class="title">Bienvenido a tu Dashboard</h1>
+    <p>
+      No tienes ninguna aplicación todavía. Puedes crear una haciendo clic en el
+      botón de abajo.
+    </p>
+    <div>
+      <NuxtLink to="/dashboard/applications">
+        <vs-button size="large"> Crear aplicación </vs-button>
+      </NuxtLink>
+    </div>
+  </div>
+  <div v-else class="grid h-full grid-cols-12 gap-y-10 xl:gap-10">
+    <div class="col-span-12 flex items-center xl:col-span-3">
+      <div class="space-y-5">
+        <div class="space-y-2">
+          <DashboardApplicationCard
+            v-for="application in applications.slice(0, 3)"
+            :key="application.id"
+            class="mx-auto max-h-52 w-fit"
+            :application="application"
+          />
+        </div>
+        <div class="flex justify-center">
+          <NuxtLink to="/dashboard/applications">
+            <vs-button size="large"> Ver todas </vs-button>
+          </NuxtLink>
+        </div>
       </div>
     </div>
     <div
