@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="flex items-center justify-end">
-        <vs-switch v-if="type === 'email' || isConnected" v-model="active" />
+        <vs-switch v-if="type === 'email' || connected" v-model="active" />
         <vs-button v-else @click="connect">Conectar</vs-button>
       </div>
     </div>
@@ -26,7 +26,11 @@ export default Vue.extend({
       type: String,
       default: 'email',
     },
-    isConnected: {
+    connected: {
+      type: Boolean,
+      default: false,
+    },
+    notifications: {
       type: Boolean,
       default: false,
     },
@@ -36,7 +40,7 @@ export default Vue.extend({
       modal: false,
       modalMessage: '',
 
-      active: this.isConnected,
+      active: this.notifications,
     }
   },
   computed: {
@@ -63,6 +67,11 @@ export default Vue.extend({
         default:
           return 'MailIcon'
       }
+    },
+  },
+  watch: {
+    active() {
+      this.$axios.$post(`/me/${this.type.toLowerCase()}/notifications`)
     },
   },
   methods: {
