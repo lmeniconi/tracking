@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!applications.length" class="space-y-5 text-center">
+  <div v-if="!applications && !loading" class="space-y-5 text-center">
     <h1 class="title">Bienvenido a tu Dashboard</h1>
     <p>No tienes ninguna aplicación todavía.</p>
     <div class="flex justify-center">
@@ -8,7 +8,8 @@
       </NuxtLink>
     </div>
   </div>
-  <div v-else class="grid h-full grid-cols-12 gap-y-10 xl:gap-10">
+
+  <div v-else-if="!loading" class="grid h-full grid-cols-12 gap-y-10 xl:gap-10">
     <div class="col-span-12 flex items-center xl:col-span-3">
       <div class="space-y-5">
         <div class="space-y-2">
@@ -43,13 +44,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
-// import dayjs from 'dayjs'
 import { startLoader } from '@/utils/loader'
 
 export default Vue.extend({
   data() {
     return {
       applications: [],
+      loading: false,
 
       chartData: {
         labels: [''],
@@ -65,6 +66,7 @@ export default Vue.extend({
   },
   methods: {
     async fetchApplications() {
+      this.loading = true
       const { data } = await this.$axios.get('/applications')
       const applications = data.map((a: any) => ({
         ...a,
@@ -81,6 +83,7 @@ export default Vue.extend({
       })
 
       this.applications = applications
+      this.loading = false
     },
 
     generateChartLabels(hours: number): string[] {
