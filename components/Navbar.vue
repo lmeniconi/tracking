@@ -8,9 +8,6 @@
       <NuxtLink to="/auth/auth0">
         <vs-button gradient> Acceder </vs-button>
       </NuxtLink>
-      <NuxtLink to="/auth/auth0">
-        <vs-button border> Registrarme </vs-button>
-      </NuxtLink>
     </div>
     <div v-else>
       <NuxtLink to="/dashboard">
