@@ -1,11 +1,8 @@
 <template>
-  <div v-if="!applications.length" class="space-y-5">
+  <div v-if="!applications.length" class="space-y-5 text-center">
     <h1 class="title">Bienvenido a tu Dashboard</h1>
-    <p>
-      No tienes ninguna aplicación todavía. Puedes crear una haciendo clic en el
-      botón de abajo.
-    </p>
-    <div>
+    <p>No tienes ninguna aplicación todavía.</p>
+    <div class="flex justify-center">
       <NuxtLink to="/dashboard/applications">
         <vs-button size="large"> Crear aplicación </vs-button>
       </NuxtLink>

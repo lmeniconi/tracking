@@ -18,29 +18,25 @@
         Configuración
       </vs-sidebar-item>
 
+      <hr class="mx-auto my-4 h-0.5 w-10/12 bg-gray-50" />
+
+      <vs-sidebar-item id="logout">
+        <template #icon> <LogoutIcon /> </template>
+        Cerrar sesión
+      </vs-sidebar-item>
+
       <template #footer>
         <div class="flex w-full justify-center space-y-2">
-          <button @click="toggleMenu">
-            <vs-avatar>
-              <img v-if="user?.picture" :src="user.picture" />
-              <UserIcon v-else />
-            </vs-avatar>
-          </button>
+          <vs-avatar>
+            <img v-if="user?.picture" :src="user.picture" />
+            <UserIcon v-else />
+          </vs-avatar>
         </div>
       </template>
     </vs-sidebar>
-
-    <transition name="fade">
-      <section
-        v-if="menu"
-        class="absolute top-0 left-0 z-[9002] h-screen w-full bg-black bg-opacity-50 p-20"
-        @click.self="toggleMenu"
-      >
-        <div class="h-full w-fit bg-white"><button>xd</button></div>
-      </section>
-    </transition>
   </aside>
 </template>
+
 <script>
 export default {
   data() {
@@ -48,7 +44,6 @@ export default {
     if (!active) active = 'home'
     return {
       active,
-      menu: false,
     }
   },
   computed: {
@@ -59,17 +54,14 @@ export default {
   watch: {
     active() {
       const path = this.active === 'home' ? '/' : `/${this.active}`
-      this.$router.push('/dashboard' + path)
+
+      if (path === '/logout') this.$router.push('/auth/logout')
+      else this.$router.push('/dashboard' + path)
     },
     $route() {
       let active = this.$route.name.split('-')[1]
       if (!active) active = 'home'
       this.active = active
-    },
-  },
-  methods: {
-    toggleMenu() {
-      this.menu = !this.menu
     },
   },
 }

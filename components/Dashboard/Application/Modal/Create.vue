@@ -73,7 +73,20 @@ export default Vue.extend({
 
         this.$emit('refresh')
         this.resetForm()
-      } catch (e) {
+
+        // @ts-ignore
+        this.$vs.notification({
+          color: 'success',
+          title: 'Aplicación creada',
+          text: 'Aplicación creada con éxito',
+        })
+      } catch (e: any) {
+        // @ts-ignore
+        this.$vs.notification({
+          color: 'danger',
+          title: 'Error',
+          text: e.response.data.message,
+        })
       } finally {
         this.loading = false
       }

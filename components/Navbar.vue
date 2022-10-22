@@ -1,5 +1,5 @@
 <template>
-  <nav class="fixed top-0 flex w-full items-center justify-between px-20">
+  <nav class="fixed top-0 z-30 flex w-full items-center justify-between px-20">
     <div>
       <BoxIcon color="white" size="30" />
     </div>

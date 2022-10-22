@@ -14,7 +14,7 @@ export default Vue.extend({
     })
 
     this.$nextTick(() => {
-      this.$router.push(localStorage.getItem('redirectUri') || '/dashboard')
+      this.$router.push('/dashboard')
     })
   },
 })

@@ -15,7 +15,7 @@ export default Vue.extend({
 
     window.location.href =
       this.$config.apiUrl +
-      '/login/auth0?redirectUri=' +
+      '/login?redirectUri=' +
       this.$config.appUrl +
       '/auth/callback'
   },

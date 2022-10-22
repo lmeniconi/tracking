@@ -61,7 +61,25 @@ export default Vue.extend({
   methods: {
     async submit() {
       this.loading = true
-      await this.$axios.delete(this.endpoint)
+
+      try {
+        await this.$axios.delete(this.endpoint)
+
+        // @ts-ignore
+        this.$vs.notification({
+          color: 'success',
+          title: 'Eliminado',
+          text: 'Eliminado correctamente',
+        })
+      } catch (e: any) {
+        // @ts-ignore
+        this.$vs.notification({
+          color: 'danger',
+          title: 'Error',
+          text: e.response.data.message,
+        })
+      }
+
       this.loading = false
 
       this.toggleActive()
