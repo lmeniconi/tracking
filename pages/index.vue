@@ -1,28 +1,35 @@
 <template>
-  <section class="relative flex h-screen items-center justify-center bg-black">
-    <div class="absolute top-0 left-0 z-10 h-full w-full overflow-y-hidden">
-      <img src="/assets/images/bg.png" class="bg-cover bg-center" />
+  <section class="relative bg-black">
+    <div class="absolute top-0 left-0 z-10 h-full w-full">
+      <img
+        src="/assets/images/bg.png"
+        class="h-full object-cover object-center"
+      />
     </div>
 
-    <div class="z-30 flex justify-center text-center">
-      <transition name="slide-fade" appear>
-        <div class="space-y-8 text-white">
-          <div class="space-y-4">
-            <h1 class="text-8xl font-bold tracking-wide">Riporter</h1>
-            <p class="text-xl font-light">
-              Reportes de estado para aplicaciones web
-            </p>
-          </div>
+    <div class="flex h-screen items-center justify-center">
+      <div class="z-30 flex justify-center text-center">
+        <transition name="slide-fade" appear>
+          <div class="space-y-8 text-white">
+            <div class="space-y-4">
+              <h1 class="text-7xl font-bold tracking-wide md:text-8xl">
+                Riporter
+              </h1>
+              <p class="text-lg font-light md:text-xl">
+                Reportes de estado para aplicaciones web
+              </p>
+            </div>
 
-          <div class="flex justify-center">
-            <NuxtLink to="/dashboard">
-              <vs-button size="xl" gradient>
-                {{ user ? 'Ir a Dashboard' : 'Empezar' }}
-              </vs-button>
-            </NuxtLink>
+            <div class="flex justify-center">
+              <NuxtLink to="/dashboard">
+                <vs-button size="xl" gradient>
+                  {{ user ? 'Ir a Dashboard' : 'Empezar' }}
+                </vs-button>
+              </NuxtLink>
+            </div>
           </div>
-        </div>
-      </transition>
+        </transition>
+      </div>
     </div>
   </section>
 </template>
