@@ -3,7 +3,7 @@
     <div class="absolute top-0 left-0 z-10 h-full w-full">
       <img
         src="/assets/images/bg.png"
-        class="h-full object-cover object-center"
+        class="h-full w-full object-cover object-center"
       />
     </div>
 
