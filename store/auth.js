@@ -16,7 +16,7 @@ export const actions = {
     } catch {
       if (redirect) {
         localStorage.setItem('redirectUri', this.$router.history.current.path)
-        this.$router.push('auth/auth0')
+        this.$router.push('/auth/auth0')
       }
     }
   },
