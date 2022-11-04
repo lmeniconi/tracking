@@ -8,10 +8,22 @@
   @apply text-2xl font-semibold lg:text-3xl;
 }
 
+.title-sm {
+  @apply text-lg font-semibold lg:text-xl;
+}
+
 .subtitle {
   @apply text-lg font-semibold lg:text-xl;
 }
 
-.section-space-y {
+.space-y {
   @apply space-y-10;
+}
+
+.space-y-sm {
+  @apply space-y-6;
+}
+
+.space-y-xs {
+  @apply space-y-4;
 }

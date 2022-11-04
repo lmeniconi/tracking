@@ -10,11 +10,21 @@
         </div>
       </div>
       <div class="flex items-center justify-end">
-        <vs-switch v-if="type === 'email' || connected" v-model="active" />
+        <vs-switch
+          v-if="type === 'email' || connected"
+          v-model="active"
+          @change.native="toggleActive"
+        />
         <vs-button v-else @click="connect">Conectar</vs-button>
       </div>
     </div>
-    <ModalConnect v-model="modal" :type="type" :message="modalMessage" />
+
+    <component
+      :is="modalConnect"
+      v-model="modal"
+      :data="modalData"
+      :connected="connected"
+    />
   </div>
 </template>
 
@@ -37,10 +47,10 @@ export default Vue.extend({
   },
   data() {
     return {
-      modal: false,
-      modalMessage: '',
-
       active: this.notifications,
+
+      modal: false,
+      modalData: null,
     }
   },
   computed: {
@@ -68,23 +78,34 @@ export default Vue.extend({
           return 'MailIcon'
       }
     },
+    modalConnect() {
+      const prefix = 'DashboardSettingModal'
+      switch (this.type) {
+        case 'telegram':
+          return `${prefix}TelegramConnect`
+        default:
+          return ''
+      }
+    },
   },
   watch: {
-    active() {
-      this.$axios.$post(`/me/${this.type.toLowerCase()}/notifications`)
+    notifications() {
+      this.active = this.notifications
     },
   },
   methods: {
+    async connectTelegram() {
+      this.modalData = await this.$axios.$post('/me/telegram/verification-code')
+      this.modal = true
+    },
+    async toggleActive() {
+      await this.$axios.$post(`/me/${this.type.toLowerCase()}/notifications`)
+    },
     connect() {
       switch (this.type) {
         case 'telegram':
           return this.connectTelegram()
       }
-    },
-    async connectTelegram() {
-      const data = await this.$axios.$post('/me/telegram/verification-code')
-      this.modalMessage = data.code
-      this.modal = true
     },
   },
 })

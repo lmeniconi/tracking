@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <section class="section-space-y">
+  <section>
+    <section class="space-y">
       <h2 class="title">Mis Aplicaciones</h2>
       <vs-button @click="createModal = true">
         <LayoutGridAddIcon class="pr-1" /> Nueva Aplicación
@@ -21,16 +21,18 @@
       v-model="createModal"
       @refresh="fetchApplications"
     />
-    <ModalDelete
+    <DashboardModalDelete
       v-model="deleteModal"
       :endpoint="`/applications/${selectedId}`"
       @refresh="fetchApplications"
     />
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { startLoader } from '@/utils/loader'
+
 export default Vue.extend({
   data() {
     return {
@@ -47,8 +49,12 @@ export default Vue.extend({
   },
   methods: {
     async fetchApplications() {
+      const loader = startLoader(this)
+
       const { data } = await this.$axios.get('/applications')
       this.applications = data
+
+      loader.close()
     },
 
     togglePreviewModal(id: number) {

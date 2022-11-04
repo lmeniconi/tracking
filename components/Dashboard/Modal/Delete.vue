@@ -21,12 +21,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import Modal from '@/mixins/Modal'
+
 export default Vue.extend({
+  mixins: [Modal],
   props: {
-    value: {
-      type: Boolean,
-      required: true,
-    },
     endpoint: {
       type: String,
       required: true,
@@ -42,21 +41,8 @@ export default Vue.extend({
   },
   data() {
     return {
-      active: this.value,
       loading: false,
     }
-  },
-  watch: {
-    value: {
-      handler(val) {
-        this.active = val
-      },
-    },
-    active: {
-      handler(val) {
-        this.$emit('input', val)
-      },
-    },
   },
   methods: {
     async submit() {
@@ -84,10 +70,6 @@ export default Vue.extend({
 
       this.toggleActive()
       this.$emit('refresh')
-    },
-
-    toggleActive() {
-      this.active = !this.active
     },
   },
 })

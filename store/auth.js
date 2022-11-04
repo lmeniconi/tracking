@@ -9,7 +9,9 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetchUser({ commit }, redirect = false) {
+  async fetchUser({ commit, state }, { redirect = false, refresh = false }) {
+    if (!refresh && state.user) return
+
     try {
       const user = await this.$axios.$get('/me')
       commit('setUser', user)

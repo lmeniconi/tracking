@@ -32,16 +32,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import Modal from '@/mixins/Modal'
+
 export default Vue.extend({
-  props: {
-    value: {
-      type: Boolean,
-      required: true,
-    },
-  },
+  mixins: [Modal],
   data() {
     return {
-      active: false,
       loading: false,
 
       form: {
@@ -49,18 +45,6 @@ export default Vue.extend({
         url: '',
       },
     }
-  },
-  watch: {
-    value: {
-      handler(val) {
-        this.active = val
-      },
-    },
-    active: {
-      handler(val) {
-        this.$emit('input', val)
-      },
-    },
   },
   methods: {
     async submit() {
@@ -97,10 +81,6 @@ export default Vue.extend({
         name: '',
         url: '',
       }
-    },
-
-    toggleActive() {
-      this.active = !this.active
     },
   },
 })
