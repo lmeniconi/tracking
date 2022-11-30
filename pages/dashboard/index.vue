@@ -8,7 +8,7 @@
         <div class="space-y-5">
           <div class="space-y-2">
             <DashboardApplicationCard
-              v-for="application in applications.slice(0, 3)"
+              v-for="application in applications.slice(0, 2)"
               :key="application.id"
               class="mx-auto max-h-52 w-fit"
               :application="application"
