@@ -17,6 +17,10 @@
       </div>
     </section>
 
+    <DashboardApplicationModalShow
+      v-model="previewModal"
+      :applicationId="selectedId"
+    />
     <DashboardApplicationModalCreate
       v-model="createModal"
       @refresh="fetchApplications"
